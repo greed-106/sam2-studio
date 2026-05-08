@@ -26,8 +26,6 @@ dependencies = [
     "pillow",
     "pyside6",
     "safetensors",
-    "torch",
-    "ultralytics>=8.4.47,<8.5",
 ]
 
 [project.optional-dependencies]

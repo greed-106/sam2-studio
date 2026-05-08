@@ -15,9 +15,13 @@ sam2-studio --smoke
 sam2-studio-release-smoke
 ```
 
+这一步只验证基础包和命令入口。完整推理 smoke 需要先单独安装 PyTorch 和 Ultralytics。
+
 ## GPU 分割 smoke
 
 ```bash
+uv pip install torch torchvision
+uv pip install "ultralytics>=8.4.47,<8.5"
 sam2-studio-segment-smoke --model ./sam2.1_l.pt --video ./test-video.mp4 --frame 0 --point 960,540 --out /tmp/sam2-studio-mask.png
 ```
 
@@ -36,4 +40,4 @@ sam2-studio-segment-smoke --model ./sam2.1_l.pt --video ./test-video.mp4 --frame
 - `LICENSE` 与 `pyproject.toml` 的项目自有代码许可证一致。
 - `docs/licenses.md` 已说明 Ultralytics、Qt/PySide6、模型权重和第三方依赖义务。
 - 不要把模型权重打入 wheel，除非权重许可证明确允许。
-- 运行 `uv run pytest`、`uv run python -m compileall src tests`、`uv run sam2-studio --smoke` 和模型 smoke。
+- 安装推理后端后运行 `uv run pytest`、`uv run python -m compileall src tests`、`uv run sam2-studio --smoke` 和模型 smoke。

@@ -6,7 +6,7 @@ SAM2 Studio 项目自有代码声明为 MIT 许可证，全文见根目录 `LICE
 
 ## Ultralytics
 
-Ultralytics 是 SAM2 推理的必需运行时依赖。本项目代码中直接使用 `SAM2Predictor` 和 `SAM2VideoPredictor`。运行或分发包含 Ultralytics 的 SAM2 Studio 时，必须遵守 Ultralytics 的 AGPL-3.0 条款，或持有有效商业授权。不要把包含 Ultralytics 的可运行应用描述成“纯 MIT 许可”。
+Ultralytics 是 SAM2 推理后端依赖，需要用户按本机环境单独安装。本项目代码中直接使用 `SAM2Predictor` 和 `SAM2VideoPredictor`。运行或分发包含 Ultralytics 的 SAM2 Studio 时，必须遵守 Ultralytics 的 AGPL-3.0 条款，或持有有效商业授权。不要把包含 Ultralytics 的可运行应用描述成“纯 MIT 许可”。
 
 ## PySide6 / Qt
 

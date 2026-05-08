@@ -5,6 +5,7 @@
 ## 已交付能力
 
 - 根目录 `pyproject.toml`，发行包名为 `sam2-studio`，命令入口为 `sam2-studio`。
+- `torch`、`torchvision` 和 `ultralytics` 从核心依赖中剥离，作为用户按本机 CPU/CUDA 环境单独安装的推理后端。
 - 新 `src/sam2_studio` 包，使用 PySide6。
 - 不复用旧 `MediaPlayer` 的轻量视频播放链路。
 - `VideoPlaybackThread` 后台顺序解码视频；`ImageSequencePlaybackThread` 后台按需读取图片序列；二者都支持 seek、generation guard 和 in-flight 帧回压。
@@ -26,6 +27,8 @@
 
 ```bash
 uv pip install -e .
+uv pip install torch torchvision
+uv pip install "ultralytics>=8.4.47,<8.5"
 uv run pytest
 uv run python -m compileall src tests
 uv run sam2-studio --smoke

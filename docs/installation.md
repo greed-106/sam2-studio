@@ -12,8 +12,31 @@
 ```bash
 uv venv
 uv pip install -e ".[dev]"
+
+# CPU 示例
+uv pip install torch torchvision
+uv pip install "ultralytics>=8.4.47,<8.5"
+
 uv run sam2-studio
 ```
+
+如果使用 CUDA，请把上面的 PyTorch 安装命令替换为匹配你显卡驱动和 CUDA 版本的官方 wheel。例如 CUDA 11.8：
+
+```bash
+uv pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
+uv pip install "ultralytics>=8.4.47,<8.5"
+uv run sam2-studio
+```
+
+`torch`、`torchvision` 和 `ultralytics` 被视为推理后端，不纳入项目核心依赖和 `uv.lock`。`uv run sam2-studio` 仍然可用；`uv run` 会确保项目依赖存在，但不会移除你用 `uv pip install` 额外安装的推理后端。
+
+如果之后执行 `uv sync`，请使用：
+
+```bash
+uv sync --inexact
+```
+
+或者在 `uv sync` 后重新安装 PyTorch 和 Ultralytics。普通 `uv sync` 可能清理不在项目依赖中的额外包。
 
 ## 使用 pip 安装
 
@@ -27,9 +50,11 @@ sam2-studio
 
 ## CUDA / CPU / MPS 说明
 
-- CUDA：如果你需要指定 CUDA 版本，请先按 PyTorch 官方说明安装匹配驱动的 `torch` wheel，再安装 SAM2 Studio。
+- CUDA：按 PyTorch 官方说明选择匹配驱动的 `torch` / `torchvision` wheel，再安装 `ultralytics>=8.4.47,<8.5`。
 - CPU：可以运行，但 SAM2 推理会明显变慢。
 - MPS：取决于 PyTorch 和 Ultralytics 在你的 macOS/PyTorch 组合下的支持情况。
+
+启动 GUI 前，SAM2 Studio 会检查 `torch` 和 `ultralytics` 是否可导入。如果缺失，会在终端给出安装提示并退出。
 
 ## 模型权重
 
